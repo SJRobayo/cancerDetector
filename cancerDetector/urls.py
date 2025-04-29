@@ -1,8 +1,7 @@
-from django.contrib import admin
+# cancerDetector/urls.py
 from django.urls import path
-from . import views  # importa tu archivo views.py
+from . import views
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
 ]

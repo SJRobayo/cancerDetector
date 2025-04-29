@@ -1,0 +1,6 @@
+relapse,tumor_size,Age,early_detection,cancer_stage,obesity,Screening_History,Healthcare_Access,diet
+No,2.3,45,Yes,1,No,Regular,Good,Balanced
+Yes,5.1,60,No,3,Yes,None,Poor,Unhealthy
+No,3.8,37,Yes,2,No,Regular,Good,Balanced
+Yes,4.5,52,No,4,Yes,None,Poor,Unhealthy
+No,1.9,29,Yes,1,No,Regular,Good,Balanced
