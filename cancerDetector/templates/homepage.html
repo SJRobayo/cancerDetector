@@ -9,17 +9,21 @@
   <div class="container py-5">
     <h1 class="text-center mb-5">🧪 Cancer Detector</h1>
 
-    <!-- Formulario solo para subir imagen -->
+    <!-- Subir CSV + Imagen -->
     <div class="card mb-4 shadow-sm">
       <div class="card-body">
-        <h3 class="card-title">🖼️ Subir Imagen Tumoral</h3>
+        <h3 class="card-title">📄 Subir archivo CSV e Imagen</h3>
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="mb-3">
-            <label class="form-label">Imagen tumoral</label>
+            <label for="csv_file" class="form-label">Archivo CSV:</label>
+            <input type="file" name="csv_file" class="form-control" accept=".csv" required>
+          </div>
+          <div class="mb-3">
+            <label for="image_file" class="form-label">Imagen médica:</label>
             <input type="file" name="image_file" class="form-control" accept="image/*" required>
           </div>
-          <button type="submit" class="btn btn-primary">Predecir</button>
+          <button type="submit" class="btn btn-primary">Realizar Predicción</button>
         </form>
       </div>
     </div>
@@ -33,27 +37,35 @@
           <div class="alert alert-info">{{ resultado }}</div>
 
           {% if predictions %}
-            <table class="table mt-3">
+            <table class="table table-striped mt-3">
               <thead>
                 <tr>
-                  <th>Método</th>
-                  <th>Clase</th>
-                  <th>Probabilidad</th>
+                  <th>#</th>
+                  <th>Predicción RF</th>
+                  <th>Prob. RF</th>
+                  <th>Prob. Imagen</th>
+                  <th>Prob. Final</th>
+                  <th>Clasificación</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>CNN</td>
-                  <td>{{ predictions.cnn_pred }}</td>
-                  <td>{{ predictions.cnn_prob }}</td>
-                </tr>
+                {% for row in predictions %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ row.Prediction_RF }}</td>
+                    <td>{{ row.Prob_RF }}</td>
+                    <td>{{ row.Prob_CNN }}</td>
+                    <td>{{ row.Prob_Final }}</td>
+                    <td>{{ row.Clasificación }}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           {% endif %}
+
         {% else %}
           <p class="text-muted">No se ha generado ningún resultado aún.</p>
         {% endif %}
-
       </div>
     </div>
   </div>
